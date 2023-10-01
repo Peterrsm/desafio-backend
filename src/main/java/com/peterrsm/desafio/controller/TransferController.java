@@ -1,6 +1,5 @@
 package com.peterrsm.desafio.controller;
 
-import com.peterrsm.desafio.entity.Transfer;
 import com.peterrsm.desafio.service.TransferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
