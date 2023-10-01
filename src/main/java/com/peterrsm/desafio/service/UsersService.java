@@ -31,21 +31,20 @@ public class UsersService {
         throw new Exception("Lojistas não podem enviar transações.");
     }
 
-    public Users saveUser(Users user){
+    public Users saveUser(Users user) {
         System.out.println("Inserindo novo user...");
         return repo.save(user);
     }
 
-    public List<Users> getAllUsers(){
+    public List<Users> getAllUsers() {
         return repo.findAll();
     }
 
-    public Users getUserById(Long id){
-        try{
+    public Users getUserById(Long id) {
+        try {
             Users usuario = repo.findUserById(id);
             return usuario;
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             return null;
         }
     }

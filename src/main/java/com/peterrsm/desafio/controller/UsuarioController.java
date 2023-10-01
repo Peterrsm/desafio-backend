@@ -21,8 +21,8 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
-    public Users getUserById(@PathVariable(value="id") Long id){
-        try{
+    public Users getUserById(@PathVariable(value = "id") Long id) {
+        try {
             return service.getUserById(id);
         } catch (Exception e) {
             return null;

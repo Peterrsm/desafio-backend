@@ -26,10 +26,10 @@ public class Users {
     @Column
     private String full_name;
 
-    @Column(unique=true)
+    @Column(unique = true)
     private String document;
 
-    @Column(unique=true)
+    @Column(unique = true)
     private String email;
 
     @Column
