@@ -3,6 +3,7 @@ package com.peterrsm.desafio.service;
 import com.peterrsm.desafio.entity.Users;
 import com.peterrsm.desafio.enumerator.UsersTypeEnum;
 import com.peterrsm.desafio.repository.UsersRepository;
+import com.peterrsm.desafio.service.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +16,6 @@ public class UsersService {
     @Autowired
     UsersRepository repo;
 
-    public Users findById(Long id) {
-        return repo.findUserById(id);
-    }
-
     public Boolean validateSenderAmmount(Optional<Users> user) throws Exception {
         if (user.get().getPortfolio() > 0)
             return true;
@@ -28,7 +25,9 @@ public class UsersService {
     public Boolean validateSenderUserType(Optional<Users> user) throws Exception {
         if (!user.get().getType().equals(UsersTypeEnum.MERCHANT))
             return true;
-        throw new Exception("Lojistas não podem enviar transações.");
+        else {
+            throw new Exception("Sender inválido.");
+        }
     }
 
     public Users saveUser(Users user) {
@@ -40,12 +39,9 @@ public class UsersService {
         return repo.findAll();
     }
 
-    public Users getUserById(Long id) {
-        try {
-            Users usuario = repo.findUserById(id);
-            return usuario;
-        } catch (Exception e) {
-            return null;
-        }
+    public Users getUserById(Long id) throws Exception {
+        Optional<Users> usuario = repo.findUserById(id);
+        return usuario
+                .orElseThrow(() -> new ResourceNotFoundException(id));
     }
 }

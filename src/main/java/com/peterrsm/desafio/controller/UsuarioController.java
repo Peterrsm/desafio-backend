@@ -21,23 +21,13 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
-    public Users getUserById(@PathVariable(value = "id") Long id) {
-        try {
-            return service.getUserById(id);
-        } catch (Exception e) {
-            return null;
-        }
+    public Users getUserById(@PathVariable(value = "id") Long id) throws Exception {
+        return service.getUserById(id);
     }
 
     @PostMapping("/")
     public Users cadastraUser(@RequestBody Users user) {
-        try {
-            service.saveUser(user);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return null;
-        }
-        return null;
+        return service.saveUser(user);
     }
 
     @GetMapping("/")
