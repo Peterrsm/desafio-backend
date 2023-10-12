@@ -35,8 +35,8 @@ public class UsuarioController {
         return service.getAllUsers();
     }
 
-    public Boolean validateSenderAmmount(Users sender) throws Exception {
-        return service.validateSenderAmmount(Optional.ofNullable(sender));
+    public Boolean validateSenderAmmount(Users sender, Float ammount) throws Exception {
+        return service.validateSenderAmmount(Optional.ofNullable(sender), ammount);
     }
 
     public Boolean validateSenderUserType(Users sender) throws Exception {
