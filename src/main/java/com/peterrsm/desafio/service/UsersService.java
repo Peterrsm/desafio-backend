@@ -1,6 +1,7 @@
 package com.peterrsm.desafio.service;
 
 import com.peterrsm.desafio.entity.Users;
+import com.peterrsm.desafio.entity.dto.UsersDTO;
 import com.peterrsm.desafio.enumerator.UsersTypeEnum;
 import com.peterrsm.desafio.repository.UsersRepository;
 import com.peterrsm.desafio.service.exceptions.InvalidUserException;
@@ -35,8 +36,13 @@ public class UsersService {
         }
     }
 
-    public Users saveUser(Users user) {
+    public Users saveUser(UsersDTO user_dto) {
         System.out.println("Inserindo novo user...");
+        Users user = user_dto.toUsers();
+        return repo.save(user);
+    }
+
+    public Users updateUser(Users user){
         return repo.save(user);
     }
 

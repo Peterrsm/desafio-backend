@@ -1,6 +1,7 @@
 package com.peterrsm.desafio.controller;
 
 import com.peterrsm.desafio.entity.Users;
+import com.peterrsm.desafio.entity.dto.UsersDTO;
 import com.peterrsm.desafio.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,8 +27,12 @@ public class UsuarioController {
     }
 
     @PostMapping("/")
-    public Users cadastraUser(@RequestBody Users user) {
+    public Users cadastraUser(@RequestBody UsersDTO user) {
         return service.saveUser(user);
+    }
+
+    public Users updateUser(Users user){
+        return service.updateUser(user);
     }
 
     @GetMapping("/")

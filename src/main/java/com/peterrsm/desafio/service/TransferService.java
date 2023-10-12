@@ -42,8 +42,8 @@ public class TransferService {
             sender.setPortfolio(sender.getPortfolio() - ammount);
             receiver.setPortfolio(receiver.getPortfolio() + ammount);
 
-            user_controller.cadastraUser(sender);
-            user_controller.cadastraUser(receiver);
+            user_controller.updateUser(sender);
+            user_controller.updateUser(receiver);
 
             return "Transferência efetuada";
         }
