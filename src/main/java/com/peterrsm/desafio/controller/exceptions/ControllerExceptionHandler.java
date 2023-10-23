@@ -1,6 +1,6 @@
 package com.peterrsm.desafio.controller.exceptions;
 
-import com.peterrsm.desafio.service.exceptions.InvalidUserException;
+import com.peterrsm.desafio.service.exceptions.MerchantSenderException;
 import com.peterrsm.desafio.service.exceptions.NoFundException;
 import com.peterrsm.desafio.service.exceptions.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -36,8 +36,8 @@ public class ControllerExceptionHandler {
                 .body(error);
     }
 
-    @ExceptionHandler(InvalidUserException.class)
-    public ResponseEntity<StandardError> invalidUserException(InvalidUserException ex, HttpServletRequest request) {
+    @ExceptionHandler(MerchantSenderException.class)
+    public ResponseEntity<StandardError> invalidUserException(MerchantSenderException ex, HttpServletRequest request) {
         String err = "Invalid sender";
         HttpStatus status = HttpStatus.EXPECTATION_FAILED;
         StandardError error = new StandardError(LocalDateTime.now(), status.value(), ex.getMessage(), err, request.getRequestURI());

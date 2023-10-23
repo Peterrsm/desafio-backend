@@ -15,7 +15,7 @@ public class TransferController {
     TransferService service;
 
     @PostMapping("/{sender_id}/{receiver_id}/{ammount}")
-    public String efetuaTransferencia(@PathVariable("receiver_id") Long receiver_id, @PathVariable("sender_id") Long sender_id, @PathVariable("ammount") Float ammount) throws Exception {
+    public String efetuaTransferencia(@PathVariable("sender_id") Long sender_id, @PathVariable("receiver_id") Long receiver_id, @PathVariable("ammount") Float ammount) throws Exception {
         return service.transferAmmount(sender_id, receiver_id, ammount);
     }
 }

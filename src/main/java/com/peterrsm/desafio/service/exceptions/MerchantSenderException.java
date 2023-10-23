@@ -3,9 +3,9 @@ package com.peterrsm.desafio.service.exceptions;
 import lombok.Data;
 
 @Data
-public class InvalidUserException extends RuntimeException {
+public class MerchantSenderException extends RuntimeException {
 
-    public InvalidUserException() {
+    public MerchantSenderException() {
         super("Invalid sender. Only MERCHANT users can transfer an amount.");
     }
 }

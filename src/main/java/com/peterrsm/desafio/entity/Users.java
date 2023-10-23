@@ -4,6 +4,8 @@ import com.peterrsm.desafio.enumerator.UsersTypeEnum;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.util.Objects;
 
 @Getter
@@ -19,21 +21,27 @@ public class Users {
     private Long id;
 
     @Column
+    @NotBlank
     private Double portfolio;
 
     @Column
+    @NotBlank
     private String full_name;
 
     @Column(unique = true)
+    @NotBlank
     private String document;
 
     @Column(unique = true)
+    @Email
     private String email;
 
     @Column
+    @NotBlank
     private String password;
 
     @Enumerated(EnumType.STRING)
+    @NotBlank
     private UsersTypeEnum type;
 
     @Override

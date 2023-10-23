@@ -4,8 +4,6 @@ import com.peterrsm.desafio.controller.UsuarioController;
 import com.peterrsm.desafio.entity.Transfer;
 import com.peterrsm.desafio.entity.Users;
 import com.peterrsm.desafio.repository.TransferRepository;
-import com.peterrsm.desafio.service.exceptions.InvalidUserException;
-import com.peterrsm.desafio.service.exceptions.NoFundException;
 import com.peterrsm.desafio.service.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,8 +44,7 @@ public class TransferService {
             user_controller.updateUser(receiver);
 
             return "Transferência efetuada";
-        }
-        else{
+        } else {
             throw new ResourceNotFoundException();
         }
     }

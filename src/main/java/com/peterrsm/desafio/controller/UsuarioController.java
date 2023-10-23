@@ -6,6 +6,7 @@ import com.peterrsm.desafio.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,11 +28,11 @@ public class UsuarioController {
     }
 
     @PostMapping("/")
-    public Users cadastraUser(@RequestBody UsersDTO user) {
+    public Users cadastraUser(@Valid @RequestBody UsersDTO user) {
         return service.saveUser(user);
     }
 
-    public Users updateUser(Users user){
+    public Users updateUser(Users user) {
         return service.updateUser(user);
     }
 

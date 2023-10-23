@@ -4,7 +4,7 @@ import com.peterrsm.desafio.entity.Users;
 import com.peterrsm.desafio.entity.dto.UsersDTO;
 import com.peterrsm.desafio.enumerator.UsersTypeEnum;
 import com.peterrsm.desafio.repository.UsersRepository;
-import com.peterrsm.desafio.service.exceptions.InvalidUserException;
+import com.peterrsm.desafio.service.exceptions.MerchantSenderException;
 import com.peterrsm.desafio.service.exceptions.NoFundException;
 import com.peterrsm.desafio.service.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +22,7 @@ public class UsersService {
     public Boolean validateSenderAmmount(Optional<Users> user, Float ammount) throws Exception {
         if (user.get().getPortfolio() >= ammount) {
             return Boolean.TRUE;
-        }
-        else{
+        } else {
             throw new NoFundException(user.get().getFull_name().toString());
         }
     }
@@ -32,7 +31,7 @@ public class UsersService {
         if (!user.get().getType().equals(UsersTypeEnum.MERCHANT))
             return true;
         else {
-            throw new InvalidUserException();
+            throw new MerchantSenderException();
         }
     }
 
@@ -42,7 +41,7 @@ public class UsersService {
         return repo.save(user);
     }
 
-    public Users updateUser(Users user){
+    public Users updateUser(Users user) {
         return repo.save(user);
     }
 
