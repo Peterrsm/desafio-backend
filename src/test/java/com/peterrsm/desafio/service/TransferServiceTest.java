@@ -1,7 +1,7 @@
 package com.peterrsm.desafio.service;
 
-import com.peterrsm.desafio.controller.TransferController;
-import com.peterrsm.desafio.controller.UsuarioController;
+import com.peterrsm.desafio.controller.impl.TransferControllerImpl;
+import com.peterrsm.desafio.controller.impl.UsuarioControllerImpl;
 import com.peterrsm.desafio.entity.Users;
 import com.peterrsm.desafio.repository.TransferRepository;
 import com.peterrsm.desafio.service.exceptions.NoFundException;
@@ -25,10 +25,10 @@ class TransferServiceTest {
     UsersService user_service;
 
     @Mock
-    TransferController controller;
+    TransferControllerImpl controller;
 
     @Mock
-    UsuarioController usuario_controller;
+    UsuarioControllerImpl usuario_controller;
 
     @Autowired
     @InjectMocks
