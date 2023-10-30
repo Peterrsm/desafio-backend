@@ -1,5 +1,6 @@
-package com.peterrsm.desafio.controller;
+package com.peterrsm.desafio.controller.impl;
 
+import com.peterrsm.desafio.controller.interfaces.IUsuarioController;
 import com.peterrsm.desafio.entity.Users;
 import com.peterrsm.desafio.entity.dto.UsersDTO;
 import com.peterrsm.desafio.service.UsersService;
@@ -12,7 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
-public class UsuarioController {
+public class UsuarioControllerImpl implements IUsuarioController {
 
     @Autowired
     UsersService service;
