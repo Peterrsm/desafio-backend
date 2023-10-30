@@ -1,6 +1,6 @@
 package com.peterrsm.desafio.service;
 
-import com.peterrsm.desafio.controller.UsuarioController;
+import com.peterrsm.desafio.controller.impl.UsuarioControllerImpl;
 import com.peterrsm.desafio.entity.Transfer;
 import com.peterrsm.desafio.entity.Users;
 import com.peterrsm.desafio.repository.TransferRepository;
@@ -17,7 +17,7 @@ public class TransferService {
     TransferRepository repository;
 
     @Autowired
-    UsuarioController user_controller;
+    UsuarioControllerImpl user_controller;
 
     public String transferAmmount(Long sender_id, Long receiver_id, Float ammount) throws Exception {
         Users sender = user_controller.getUserById(sender_id);
@@ -28,7 +28,7 @@ public class TransferService {
             user_controller.validateSenderAmmount(sender, ammount);
 
             System.out.println("Efetuando transferencia de " + sender.getFull_name() + " para " + receiver.getFull_name() +
-                    " no valor de " + ammount);
+                    " no valor de R$" + ammount);
 
             Transfer transfer = new Transfer();
             transfer.setAmmount(ammount);
