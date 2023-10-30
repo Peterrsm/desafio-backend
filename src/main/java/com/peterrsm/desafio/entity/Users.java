@@ -21,15 +21,12 @@ public class Users {
     private Long id;
 
     @Column
-    @NotBlank
     private Double portfolio;
 
     @Column
-    @NotBlank
     private String full_name;
 
     @Column(unique = true)
-    @NotBlank
     private String document;
 
     @Column(unique = true)
@@ -37,18 +34,16 @@ public class Users {
     private String email;
 
     @Column
-    @NotBlank
     private String password;
 
     @Enumerated(EnumType.STRING)
-    @NotBlank
     private UsersTypeEnum type;
 
     @Override
     public String toString() {
         return "Usuario{" +
                 "id=" + id +
-                ", carteira=" + portfolio +
+                ", carteira=R$" + portfolio +
                 ", nomeCompleto='" + full_name + '\'' +
                 ", cpf='" + document + '\'' +
                 ", email='" + email + '\'' +
