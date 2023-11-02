@@ -7,7 +7,6 @@ import com.peterrsm.desafio.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +23,7 @@ public class UsuarioControllerImpl implements IUsuarioController {
     }
 
     @PostMapping("/")
-    public Users createUser(@Valid @RequestBody UsersDTO userDTO) {
+    public Users createUser(@RequestBody UsersDTO userDTO) {
         return service.saveUser(userDTO);
     }
 

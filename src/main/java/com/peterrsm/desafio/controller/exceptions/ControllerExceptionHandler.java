@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.ConstraintViolationException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDateTime;
 
 @ControllerAdvice
@@ -40,6 +42,28 @@ public class ControllerExceptionHandler {
     public ResponseEntity<StandardError> invalidUserException(MerchantSenderException ex, HttpServletRequest request) {
         String err = "Invalid sender";
         HttpStatus status = HttpStatus.EXPECTATION_FAILED;
+        StandardError error = new StandardError(LocalDateTime.now(), status.value(), ex.getMessage(), err, request.getRequestURI());
+
+        return ResponseEntity
+                .status(status)
+                .body(error);
+    }
+
+    @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
+    public ResponseEntity<StandardError> duplicateViolationException(SQLIntegrityConstraintViolationException ex, HttpServletRequest request) {
+        String err = "Duplicate entry violation";
+        HttpStatus status = HttpStatus.CONFLICT;
+        StandardError error = new StandardError(LocalDateTime.now(), status.value(), ex.getMessage(), err, request.getRequestURI());
+
+        return ResponseEntity
+                .status(status)
+                .body(error);
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<StandardError> duplicateViolationException(ConstraintViolationException ex, HttpServletRequest request) {
+        String err = "Duplicate entry violation";
+        HttpStatus status = HttpStatus.CONFLICT;
         StandardError error = new StandardError(LocalDateTime.now(), status.value(), ex.getMessage(), err, request.getRequestURI());
 
         return ResponseEntity

@@ -3,6 +3,7 @@ package com.peterrsm.desafio.service;
 import com.peterrsm.desafio.entity.Users;
 import com.peterrsm.desafio.entity.dto.UsersDTO;
 import com.peterrsm.desafio.enumerator.UsersTypeEnum;
+import com.peterrsm.desafio.mapper.UsersMapper;
 import com.peterrsm.desafio.repository.UsersRepository;
 import com.peterrsm.desafio.service.exceptions.MerchantSenderException;
 import com.peterrsm.desafio.service.exceptions.NoFundException;
@@ -18,6 +19,9 @@ public class UsersService {
 
     @Autowired
     UsersRepository repo;
+
+    @Autowired
+    UsersMapper mapper;
 
     public Boolean validateSenderAmmount(Optional<Users> user, Float ammount) throws Exception {
         if (user.get().getPortfolio() >= ammount) {
@@ -37,7 +41,8 @@ public class UsersService {
 
     public Users saveUser(UsersDTO user_dto) {
         System.out.println("Inserindo novo user...");
-        Users user = user_dto.toUsers();
+        System.out.println(user_dto.toString());
+        Users user = mapper.toUsers(user_dto);
         return repo.save(user);
     }
 

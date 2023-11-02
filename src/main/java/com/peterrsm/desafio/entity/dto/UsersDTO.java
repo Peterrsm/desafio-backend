@@ -1,30 +1,28 @@
 package com.peterrsm.desafio.entity.dto;
 
-import com.peterrsm.desafio.entity.Users;
 import com.peterrsm.desafio.enumerator.UsersTypeEnum;
+import lombok.Getter;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import java.io.Serializable;
 
-public class UsersDTO {
+@Getter
+public class UsersDTO implements Serializable {
     private Double portfolio;
     private String full_name;
     private String document;
     private String email;
     private String password;
-    @Enumerated(EnumType.STRING)
     private UsersTypeEnum type;
 
-    public Users toUsers(){
-        Users user = Users.builder()
-                .email(this.email)
-                .document(this.document)
-                .full_name(this.full_name)
-                .password(this.password)
-                .portfolio(this.portfolio)
-                .type(this.type)
-                .build();
-
-        return  user;
+    @Override
+    public String toString() {
+        return "UsersDTO{" +
+                "portfolio=" + portfolio +
+                ", full_name='" + full_name + '\'' +
+                ", document='" + document + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", type=" + type +
+                '}';
     }
 }
