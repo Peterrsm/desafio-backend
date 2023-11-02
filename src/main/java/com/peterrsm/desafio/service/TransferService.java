@@ -30,18 +30,30 @@ public class TransferService {
             System.out.println("Efetuando transferencia de " + sender.getFull_name() + " para " + receiver.getFull_name() +
                     " no valor de R$" + ammount);
 
-            Transfer transfer = new Transfer();
-            transfer.setAmmount(ammount);
-            transfer.setReceiver(receiver);
-            transfer.setSender(sender);
-            transfer.setTimestamp(LocalDateTime.now());
-            repository.save(transfer);
+            try {
+                Transfer transfer = new Transfer();
+                transfer.setAmmount(ammount);
+                transfer.setReceiver(receiver);
+                transfer.setSender(sender);
+                transfer.setTimestamp(LocalDateTime.now());
+                repository.save(transfer);
+            } catch (Exception e) {
+                return e.getMessage();
+            }
 
-            sender.setPortfolio(sender.getPortfolio() - ammount);
-            receiver.setPortfolio(receiver.getPortfolio() + ammount);
+            try {
+                sender.setPortfolio(sender.getPortfolio() - ammount);
+                receiver.setPortfolio(receiver.getPortfolio() + ammount);
+            } catch (Exception e) {
+                return e.getMessage();
+            }
 
-            user_controller.updateUser(sender);
-            user_controller.updateUser(receiver);
+            try {
+                user_controller.updateUser(sender);
+                user_controller.updateUser(receiver);
+            } catch (Exception e) {
+                return e.getMessage();
+            }
 
             return "Transferência efetuada";
         } else {
