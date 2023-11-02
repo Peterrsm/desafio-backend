@@ -12,14 +12,11 @@ import java.util.List;
 
 public interface IUsuarioController {
 
-    @GetMapping("/transfer/{receiverId}/{senderId}")
-    String availableInitialization();
-
     @GetMapping("/{id}")
     Users getUserById(@PathVariable(value = "id") Long id) throws Exception;
 
     @PostMapping("/")
-    Users cadastraUser(@Valid @RequestBody UsersDTO user);
+    Users createUser(@Valid @RequestBody UsersDTO user);
 
     Users updateUser(Users user);
 

@@ -18,19 +18,14 @@ public class UsuarioControllerImpl implements IUsuarioController {
     @Autowired
     UsersService service;
 
-    @GetMapping("/transfer/{receiverId}/{senderId}")
-    public String availableInitialization() {
-        return "Está vivo!!!";
-    }
-
     @GetMapping("/{id}")
     public Users getUserById(@PathVariable(value = "id") Long id) throws Exception {
         return service.getUserById(id);
     }
 
     @PostMapping("/")
-    public Users cadastraUser(@Valid @RequestBody UsersDTO user) {
-        return service.saveUser(user);
+    public Users createUser(@Valid @RequestBody UsersDTO userDTO) {
+        return service.saveUser(userDTO);
     }
 
     public Users updateUser(Users user) {
