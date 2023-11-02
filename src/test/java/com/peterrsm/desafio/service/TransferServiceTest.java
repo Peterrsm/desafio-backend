@@ -3,7 +3,9 @@ package com.peterrsm.desafio.service;
 import com.peterrsm.desafio.controller.impl.TransferControllerImpl;
 import com.peterrsm.desafio.controller.impl.UsuarioControllerImpl;
 import com.peterrsm.desafio.entity.Users;
+import com.peterrsm.desafio.enumerator.UsersTypeEnum;
 import com.peterrsm.desafio.repository.TransferRepository;
+import com.peterrsm.desafio.service.exceptions.MerchantSenderException;
 import com.peterrsm.desafio.service.exceptions.NoFundException;
 import com.peterrsm.desafio.stubs.UsersStub;
 import org.junit.jupiter.api.Assertions;
@@ -56,11 +58,28 @@ class TransferServiceTest {
 
         Assertions.assertNotNull(sender);
         Assertions.assertNotNull(receiver);
+        Assertions.assertEquals(sender.getType(), UsersTypeEnum.COMMON);
         Assertions.assertEquals(sender.getPortfolio(), 500);
         Assertions.assertEquals(receiver.getPortfolio(), 500);
         Assertions.assertEquals("Transferência efetuada", service.transferAmmount(1L, 2L, ammount));
         Assertions.assertEquals(sender.getPortfolio(), 490);
         Assertions.assertEquals(receiver.getPortfolio(), 510);
+    }
+
+    @Test
+    void shouldThrowMerchantSenderException() throws Exception {
+        Users userOne = stub.createCommonUser();
+        Users userTwo = stub.createMerchantUser();
+        Float ammount = 10F;
+
+        when(usuario_controller.getUserById(2L)).thenReturn(userOne);
+        when(usuario_controller.getUserById(1L)).thenReturn(userTwo);
+        when(usuario_controller.validateSenderUserType(userTwo))
+                .thenThrow(MerchantSenderException.class);
+
+        Assertions.assertNotNull(userOne);
+        Assertions.assertNotNull(userTwo);
+        Assertions.assertThrows(MerchantSenderException.class, () -> service.transferAmmount(1L, 2L, ammount));
     }
 
 }
