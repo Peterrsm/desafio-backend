@@ -8,11 +8,14 @@ import com.peterrsm.desafio.stubs.UsersStub;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
+@ExtendWith(MockitoExtension.class)
 class UsersServiceTest {
 
     @Autowired

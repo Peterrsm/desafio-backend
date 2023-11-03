@@ -6,18 +6,20 @@ import com.peterrsm.desafio.entity.Users;
 import com.peterrsm.desafio.enumerator.UsersTypeEnum;
 import com.peterrsm.desafio.repository.TransferRepository;
 import com.peterrsm.desafio.service.exceptions.MerchantSenderException;
-import com.peterrsm.desafio.service.exceptions.NoFundException;
 import com.peterrsm.desafio.stubs.UsersStub;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 class TransferServiceTest {
 
     @Mock
@@ -53,8 +55,8 @@ class TransferServiceTest {
         when(usuario_controller.getUserById(2L)).thenReturn(receiver);
         when(usuario_controller.validateSenderAmmount(sender, ammount))
                 .thenReturn(Boolean.TRUE);
-        when(usuario_controller.validateSenderAmmount(receiver, ammount))
-                .thenThrow(NoFundException.class);
+//        when(usuario_controller.validateSenderAmmount(receiver, ammount))
+//                .thenThrow(NoFundException.class);
 
         Assertions.assertNotNull(sender);
         Assertions.assertNotNull(receiver);

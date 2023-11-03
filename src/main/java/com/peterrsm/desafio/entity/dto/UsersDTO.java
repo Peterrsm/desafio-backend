@@ -1,11 +1,13 @@
 package com.peterrsm.desafio.entity.dto;
 
 import com.peterrsm.desafio.enumerator.UsersTypeEnum;
+import lombok.Builder;
 import lombok.Getter;
 
 import java.io.Serializable;
 
 @Getter
+@Builder
 public class UsersDTO implements Serializable {
     private Double portfolio;
     private String full_name;
