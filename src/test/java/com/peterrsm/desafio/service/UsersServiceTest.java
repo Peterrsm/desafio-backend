@@ -2,21 +2,31 @@ package com.peterrsm.desafio.service;
 
 import com.peterrsm.desafio.entity.Users;
 import com.peterrsm.desafio.enumerator.UsersTypeEnum;
+import com.peterrsm.desafio.repository.UsersRepository;
 import com.peterrsm.desafio.service.exceptions.MerchantSenderException;
 import com.peterrsm.desafio.service.exceptions.NoFundException;
+import com.peterrsm.desafio.service.exceptions.ResourceNotFoundException;
 import com.peterrsm.desafio.stubs.UsersStub;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Optional;
+
+import static org.mockito.Mockito.when;
+
 
 @ExtendWith(MockitoExtension.class)
 class UsersServiceTest {
+
+    @Mock
+    UsersRepository repo;
 
     @Autowired
     @InjectMocks
@@ -45,6 +55,17 @@ class UsersServiceTest {
 
         Assertions.assertNotNull(sender);
         Assertions.assertThrows(NoFundException.class, () -> user_service.validateSenderAmmount(java.util.Optional.of(sender), 1F));
+    }
+
+    @Test
+    void shouldThroResourceNotFoundException() throws Exception {
+        Users sender = stub.createMerchantUser();
+
+        when(repo.findUserById(100L))
+                .thenReturn(Optional.empty());
+
+        Assertions.assertNotNull(sender);
+        Assertions.assertThrows(ResourceNotFoundException.class, () -> user_service.getUserById(100L));
     }
 
 }
